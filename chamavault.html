@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChamaVault Tutorial Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(to bottom right, #f0fdf4, #ccfbf1);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: #059669;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            color: #1f2937;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .all-steps-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #059669;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .all-steps-btn:hover {
+            background: #047857;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #059669;
+            transition: width 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .instructions-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .instructions-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .check-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #059669;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .instruction-item {
+            display: flex;
+            gap: 0.75rem;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .instruction-number {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .nav-btn.prev {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .nav-btn.prev:hover:not(:disabled) {
+            background: #e5e7eb;
+        }
+
+        .nav-btn.next {
+            background: #059669;
+            color: white;
+        }
+
+        .nav-btn.next:hover:not(:disabled) {
+            background: #047857;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .step-counter {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .screenshot-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1rem;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .screenshot-container {
+            position: relative;
+            aspect-ratio: 9/16;
+            background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .screenshot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .screenshot-image.loaded {
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .screenshot-placeholder.hidden {
+            display: none;
+        }
+
+        .placeholder-icon {
+            width: 5rem;
+            height: 5rem;
+            background: #d1d5db;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-icon svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: #9ca3af;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #059669;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .overlay-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .overlay-header h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .close-btn {
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .overlay-body {
+            padding: 1.5rem;
+        }
+
+        .category-section {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .category-number {
+            width: 2rem;
+            height: 2rem;
+            background: #059669;
+            color: white;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .step-card {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .step-card:hover {
+            border-color: #6ee7b7;
+            background: #f9fafb;
+        }
+
+        .step-card.active {
+            border-color: #059669;
+            background: #ecfdf5;
+        }
+
+        .step-card-header {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .step-card .step-number {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .step-card.active .step-number {
+            background: #059669;
+            color: white;
+        }
+
+        .step-card-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .step-card-description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.4;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
+        @media print {
+            .header, .navigation, .all-steps-btn, .screenshot-card {
+                display: none;
+            }
+            
+            body {
+                background: white;
+            }
+            
+            .instructions-card {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">CV</div>
+                <div class="logo-text">
+                    <h1>ChamaVault Tutorial</h1>
+                    <p>Step-by-step guide</p>
+                </div>
+            </div>
+            <button class="all-steps-btn" onclick="toggleOverlay()">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                <span>All Steps</span>
+            </button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-grid">
+            <!-- Instructions -->
+            <div class="instructions-card">
+                <span class="category-badge" id="categoryBadge"></span>
+                <h2 class="step-title" id="stepTitle"></h2>
+                <p class="step-description" id="stepDescription"></p>
+
+                <div class="instructions-section">
+                    <h3>
+                        <span class="check-icon">✓</span>
+                        Instructions
+                    </h3>
+                    <ul class="instructions-list" id="instructionsList"></ul>
+                </div>
+
+                <div class="navigation">
+                    <button class="nav-btn prev" id="prevBtn" onclick="previousStep()">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Previous
+                    </button>
+                    
+                    <span class="step-counter" id="stepCounter"></span>
+                    
+                    <button class="nav-btn next" id="nextBtn" onclick="nextStep()">
+                        Next
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Screenshot -->
+            <div class="screenshot-card">
+                <div class="screenshot-container">
+                    <img id="screenshotImage" class="screenshot-image" alt="Screenshot">
+                    <div class="screenshot-placeholder" id="screenshotPlaceholder">
+                        <div class="placeholder-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <p style="color: #6b7280; font-weight: 500;">Screenshot <span id="screenshotNumber"></span></p>
+                        <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.5rem;">Place your screenshot in:<br><code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">images/step-<span id="stepFileName"></span>.png</code></p>
+                    </div>
+                    <div class="screenshot-label" id="screenshotLabel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Steps Overlay -->
+    <div class="overlay" id="overlay" onclick="closeOverlayOnBackdrop(event)">
+        <div class="overlay-content" onclick="event.stopPropagation()">
+            <div class="overlay-header">
+                <h2>All Tutorial Steps</h2>
+                <button class="close-btn" onclick="toggleOverlay()">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="overlay-body" id="overlayBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const tutorialSteps = [
+            {
+                title: "Welcome to ChamaVault",
+                description: "ChamaVault empowers Chamas (savings groups) to save, grow, and thrive together. This guide will walk you through using the platform seamlessly.",
+                instructions: [
+                    "Click 'Sign Up' to create a new account",
+                    "Click 'Login' if you already have an account",
+                    "Click 'Learn About Bitcoin' to understand the platform's currency"
+                ],
+                category: "Getting Started"
+            },
+            {
+                title: "Create Your Account",
+                description: "Join ChamaVault by verifying your phone number. This ensures secure access to your savings.",
+                instructions: [
+                    "Enter your phone number in international format (e.g., 254700000035)",
+                    "Click 'Verify Phone Number' to receive a verification code",
+                    "If you have an account, click 'Login' instead"
+                ],
+                category: "Registration"
+            },
+            {
+                title: "Verify Your Phone Number",
+                description: "Enter the 6-digit verification code sent to your phone to confirm your identity.",
+                instructions: [
+                    "Check your phone for the 6-digit code",
+                    "Enter the code in the boxes provided",
+                    "Click 'Continue' to proceed",
+                    "If you don't receive the code, wait for the timer and click 'Resend code'"
+                ],
+                category: "Registration"
+            },
+            {
+                title: "Set Your Security PIN",
+                description: "Create a secure PIN that will be used for all transactions on the platform.",
+                instructions: [
+                    "Enter your full name",
+                    "Create a 4-digit PIN (keep it secure!)",
+                    "Confirm your PIN by entering it again",
+                    "Check the 'I understood the terms & policy' box",
+                    "Click 'Go to Dashboard' to complete setup"
+                ],
+                category: "Security Setup"
+            },
+            {
+                title: "Your Dashboard",
+                description: "This is your main hub. Access your wallet, view activities, and explore featured Chamas.",
+                instructions: [
+                    "View your wallet balance in BTC and KES at the top",
+                    "Use the action buttons: Send, Receive, Contribute, or My Chama",
+                    "Explore 'Featured Chamas' to discover groups to join",
+                    "Check 'Recent Activities' for your transaction history",
+                    "Access the menu (☰) for additional options"
+                ],
+                category: "Navigation"
+            },
+            {
+                title: "Dashboard Menu",
+                description: "Access all major features from the hamburger menu.",
+                instructions: [
+                    "Click 'Dashboard' to return to the home screen",
+                    "Click 'Chama' to view or create savings groups",
+                    "Click 'Wallet' to manage your funds",
+                    "Click 'Profile Settings' to update your information",
+                    "Click 'Logout' to securely exit the application"
+                ],
+                category: "Navigation"
+            },
+            {
+                title: "My Chamas Section",
+                description: "View and manage your active savings groups (Chamas).",
+                instructions: [
+                    "Switch between 'My Chamas' and 'Discover' tabs",
+                    "View 'ACTIVE' Chamas you're participating in",
+                    "Check 'PENDING' Chamas awaiting approval",
+                    "Click 'Create Chama' to start a new savings group"
+                ],
+                category: "Chamas"
+            },
+            {
+                title: "Create a New Chama - Step 1",
+                description: "Provide basic information about your Chama group.",
+                instructions: [
+                    "Enter a unique Chama Name",
+                    "Write a clear Description of your group's purpose",
+                    "Optionally upload a Logo image for your group",
+                    "Check 'I understood the terms & policy'",
+                    "Click 'Next' to continue to contribution rules"
+                ],
+                category: "Creating Chamas"
+            },
+            {
+                title: "Create a New Chama - Step 2",
+                description: "Set up contribution rules and savings goals for your group.",
+                instructions: [
+                    "Set the Contribution Amount (in KES)",
+                    "Choose Contribution Frequency (Daily, Weekly, Monthly)",
+                    "Set a Due Date for the savings cycle",
+                    "Define the Purpose and Target Amount",
+                    "Set the number of Members Required",
+                    "Review your setup in the 'Chama Preview' section",
+                    "Check upcoming contribution dates",
+                    "Click 'Create Chama' to finalize"
+                ],
+                category: "Creating Chamas"
+            },
+            {
+                title: "Chama Details View",
+                description: "Monitor your Chama's progress and manage contributions.",
+                instructions: [
+                    "View Current Balance vs Target progress",
+                    "Check Current Beneficiary and Rotation Index",
+                    "See if the contribution cycle is open or closed",
+                    "Click 'Make Late Contribution' if you missed a payment",
+                    "Click 'Contribute to Group' to make your regular contribution",
+                    "View your Chama Wallet balance",
+                    "See all Group Members and their roles",
+                    "Read the group Description and rules",
+                    "Check Recent Activity for group transactions"
+                ],
+                category: "Managing Chamas"
+            },
+            {
+                title: "Manage Your Wallets",
+                description: "View and organize your multiple wallets.",
+                instructions: [
+                    "View 'All Wallets' total balance",
+                    "See individual wallet balances (Contribution, Personal)",
+                    "Click 'View Details' to see wallet transaction history",
+                    "Click 'Create New Wallet' to add another wallet"
+                ],
+                category: "Wallet Management"
+            },
+            {
+                title: "Create a New Wallet",
+                description: "Add additional wallets to organize your funds.",
+                instructions: [
+                    "Enter a descriptive Wallet Name (e.g., 'Daily Spending')",
+                    "Click 'Create Wallet' to add it to your account"
+                ],
+                category: "Wallet Management"
+            },
+            {
+                title: "Receive Payments",
+                description: "Generate invoices to receive Bitcoin payments.",
+                instructions: [
+                    "Select which wallet should receive the payment",
+                    "Enter the Amount (in sats) you want to receive",
+                    "Add an optional Memo to describe the payment",
+                    "Click 'Generate Invoice' to create a payment request"
+                ],
+                category: "Transactions"
+            },
+            {
+                title: "Share Your Payment Invoice",
+                description: "Once generated, share your invoice for payment.",
+                instructions: [
+                    "The QR code is automatically displayed and 'LISTENING' for payment",
+                    "View the amount (in sats) and purpose below the QR code",
+                    "Wait for the status to change from 'Waiting for payment...'",
+                    "Click 'Copy' to copy the invoice details",
+                    "Click 'Share' to share via other apps",
+                    "The sender scans the QR code to complete payment"
+                ],
+                category: "Transactions"
+            },
+            {
+                title: "Select Payment Wallet",
+                description: "Choose which wallet to use for making your Chama contribution or payment.",
+                instructions: [
+                    "Review your available wallets and their balances",
+                    "The 'CONTRIBUTION' wallet shows group-specific funds",
+                    "The 'PERSONAL' wallet (user-savers-chama) shows your personal balance",
+                    "Tap on the wallet you want to use for the payment",
+                    "Click the X button to cancel and return"
+                ],
+                category: "Transactions"
+            },
+            {
+                title: "Contribution Dashboard",
+                description: "Track your Chama contributions and payment obligations.",
+                instructions: [
+                    "View 'Total Owed' showing your outstanding contribution amount",
+                    "See 'Pending Cycles' indicating contributions due",
+                    "Review your active Chama details including member count and rotation",
+                    "Check the 'Default' amount for the current cycle",
+                    "View the current beneficiary who will receive funds",
+                    "Monitor your contribution progress (KES 0 / KES 7.93)",
+                    "See the next contribution due date (12 Feb 2026)",
+                    "Click 'Pay Now' when ready to make your contribution"
+                ],
+                category: "Making Contributions"
+            },
+            {
+                title: "Dashboard After Activity",
+                description: "Your updated dashboard showing recent transactions and activities.",
+                instructions: [
+                    "Check your updated wallet balance after transactions",
+                    "View the current BTC to KES exchange rate",
+                    "See 'Recent Activities' with timestamps",
+                    "Notice 'Your turn' notification for contribution cycles",
+                    "Review 'chama creation' confirmation",
+                    "Track 'registration' completion",
+                    "Use quick action buttons: Send, Receive, Contribute, My Chama"
+                ],
+                category: "Dashboard Overview"
+            },
+            {
+                title: "View Transaction History",
+                description: "Access detailed records of your wallet transactions and invoices.",
+                instructions: [
+                    "View your selected wallet balance at the top",
+                    "Click the wallet dropdown to switch between wallets",
+                    "Review 'Past Invoices' section for transaction history",
+                    "See transaction STATUS (PAID, PENDING, etc.)",
+                    "Check the AMOUNT in sats and KES",
+                    "View the PAYMENT HASH for each transaction",
+                    "Use the Filter option to sort transactions",
+                    "Click Send or Receive for new transactions"
+                ],
+                category: "Transaction History"
+            },
+            {
+                title: "Payment Success Confirmation",
+                description: "Confirmation screen after successfully receiving a payment.",
+                instructions: [
+                    "See the success checkmark confirming payment received",
+                    "Read 'Invoice settled successfully' message",
+                    "Click 'Create New Invoice' to generate another payment request",
+                    "Use the back arrow to return to the previous screen",
+                    "The payment is now reflected in your wallet balance"
+                ],
+                category: "Transactions"
+            },
+            {
+                title: "Wallet Overview with Multiple Wallets",
+                description: "View all your wallets and their individual balances in one place.",
+                instructions: [
+                    "See 'All Wallets' total balance (10 sats)",
+                    "View the CONTRIBUTION wallet (9 sats) marked as 'Active'",
+                    "View the PERSONAL wallet 'user-savers-chama' (1 sat)",
+                    "Click 'View Details' on any wallet to see its transaction history",
+                    "Click 'Create New Wallet' to add additional wallets",
+                    "Use Send and Receive buttons for quick transactions",
+                    "Check 'Past Invoices' showing PENDING and PAID transactions"
+                ],
+                category: "Wallet Management"
+            },
+            {
+                title: "Manage Member Requests (Admin)",
+                description: "Review and approve or reject membership requests for your Chama.",
+                instructions: [
+                    "Switch to the 'PENDING' tab to see membership requests",
+                    "View the 'Member Requests' notification badge showing count (1)",
+                    "Click to expand and see request details",
+                    "Review applicant information (Name: Marylin Doe, Phone: 254700000035)",
+                    "Check the request date (Requested 2/11/2026)",
+                    "Click the green checkmark (✓) to approve the request",
+                    "Click the red X to reject the request",
+                    "View your Chama details: 91 sats collected, Max 5 members"
+                ],
+                category: "Chama Administration"
+            },
+            {
+                title: "View Activity Notification Details",
+                description: "Check detailed information about pending activities and requests.",
+                instructions: [
+                    "Notice the 'WAITING' status badge",
+                    "Read the Action type: 'join chama request'",
+                    "Review the Description of who requested to join",
+                    "Understand the Reason provided by the applicant",
+                    "Read admin Comments about approval status",
+                    "Note the Deadline for responding to the request",
+                    "Click 'View Request' to go to the approval screen",
+                    "Click 'Close' to dismiss the notification",
+                    "Copy information using the copy icon if needed"
+                ],
+                category: "Notifications"
+            },
+            {
+                title: "Select Your Role When Joining",
+                description: "Choose the role you want to have when joining a Chama group.",
+                instructions: [
+                    "Review the available role options",
+                    "Member: Regular member with voting rights (default selected)",
+                    "Treasurer: Manages chama finances",
+                    "Chairperson: Leads meetings and represents the chama",
+                    "Admin: Manages chama settings and members",
+                    "Tap on your preferred role to select it",
+                    "The selected role shows a green checkmark",
+                    "Click 'Confirm Join' to proceed with your selection",
+                    "Click 'Cancel' to go back without joining"
+                ],
+                category: "Joining Chamas"
+            },
+            {
+                title: "View Beneficiary Status",
+                description: "Monitor your status as a beneficiary and the current contribution cycle.",
+                instructions: [
+                    "See the Chama overview with Current Balance vs Target",
+                    "Check your beneficiary status: 'You are receiving this round'",
+                    "View the Current Beneficiary name (Marylin Doe)",
+                    "Check the Rotation Index position",
+                    "See the Cycle Ends date and time",
+                    "Note that you 'Cannot Contribute (Beneficiary)' during your receiving round",
+                    "View your Chama Wallet balance",
+                    "See all Group Members and their roles",
+                    "Review group Description and contribution Frequency",
+                    "Check Recent Activity for the latest cycle status"
+                ],
+                category: "Managing Chamas"
+            },
+            {
+                title: "Confirm Payment to Beneficiary",
+                description: "Review and confirm your contribution payment details before sending.",
+                instructions: [
+                    "Review who you're 'CONTRIBUTING TO' (Marylin Doe - Savers group)",
+                    "Check the payment source under 'Paying From'",
+                    "Verify your wallet (user-savers-chama) and available balance (7.93 KES)",
+                    "Confirm the payment amount is correct",
+                    "Click 'Confirm Payment' to complete the transaction",
+                    "Click 'Change Wallet' if you want to use a different wallet",
+                    "Click the X to cancel the payment"
+                ],
+                category: "Making Contributions"
+            },
+            {
+                title: "Updated Wallet Balances After Payment",
+                description: "View your updated wallet balances after making a contribution payment.",
+                instructions: [
+                    "Notice the updated 'All Wallets' total balance (10 sats)",
+                    "Check the CONTRIBUTION wallet balance (7 sats) - decreased after payment",
+                    "View the PERSONAL wallet 'user-savers-chama' balance (3 sats)",
+                    "Review 'Past Invoices' showing both PENDING (9 sats) and PAID (10 sats) transactions",
+                    "See the transaction amounts in both sats and KES",
+                    "View the PAYMENT HASH for each completed transaction",
+                    "Use 'View Details' to see individual wallet transaction history",
+                    "Click 'Filter' to sort invoices by status or date"
+                ],
+                category: "Wallet Management"
+            },
+            {
+                title: "Send Bitcoin to Another User",
+                description: "Transfer Bitcoin from your wallet to another user's wallet.",
+                instructions: [
+                    "Choose between 'Send to User' or 'Pay Invoice' tabs",
+                    "Enter the Recipient Wallet ID (or click 'Paste' to paste from clipboard)",
+                    "Enter the Amount in Sats you want to send",
+                    "Add an optional MEMO to describe the transfer",
+                    "Note that 'Network Fee' will be calculated at confirmation",
+                    "Review all details before proceeding",
+                    "Click 'Continue' to proceed to confirmation screen",
+                    "Use 'Back' button to return to previous screen"
+                ],
+                category: "Sending Payments"
+            },
+            {
+                title: "Pay Lightning Invoice",
+                description: "Pay a Lightning Network invoice by pasting the invoice string.",
+                instructions: [
+                    "Switch to the 'Pay Invoice' tab",
+                    "Enter or paste the Lightning Invoice string in the field",
+                    "Click 'Paste' button to paste from clipboard",
+                    "The system will automatically decode the invoice",
+                    "Read the info: 'We will decode the amount, fee, and description automatically'",
+                    "Note that 'Network Fee' will be calculated at confirmation",
+                    "Click 'Continue' to proceed after pasting the invoice",
+                    "Use 'Back' to return to the previous screen"
+                ],
+                category: "Sending Payments"
+            },
+            {
+                title: "Confirm Send Transaction",
+                description: "Review and confirm your Bitcoin transfer before completing the transaction.",
+                instructions: [
+                    "Review the 'SENDING TO' wallet address and status (Active)",
+                    "Verify the recipient wallet ID",
+                    "Check the AMOUNT (1 sats) and approximate KES value",
+                    "Review the MEMO describing the transaction",
+                    "Note the Network Fee is 'Variable' and will be calculated",
+                    "Double-check all transaction details are correct",
+                    "Click 'Confirm Send' to complete the transfer",
+                    "Click 'Cancel' to abort the transaction"
+                ],
+                category: "Sending Payments"
+            }
+        ];
+
+        let currentStep = 0;
+
+        // Configuration: Set your images folder path here
+        const IMAGES_FOLDER = 'images/'; // Change this if your images are in a different folder
+        const IMAGE_FORMAT = '.png'; // Change to '.jpg' if using JPG images
+
+        function loadScreenshot() {
+            const img = document.getElementById('screenshotImage');
+            const placeholder = document.getElementById('screenshotPlaceholder');
+            const stepNumber = currentStep + 1;
+            
+            // Try to load the image
+            const imagePath = `${IMAGES_FOLDER}step-${stepNumber}${IMAGE_FORMAT}`;
+            
+            img.onload = function() {
+                img.classList.add('loaded');
+                placeholder.classList.add('hidden');
+            };
+            
+            img.onerror = function() {
+                img.classList.remove('loaded');
+                placeholder.classList.remove('hidden');
+            };
+            
+            img.src = imagePath;
+        }
+
+        function renderStep() {
+            const step = tutorialSteps[currentStep];
+            const progress = ((currentStep + 1) / tutorialSteps.length) * 100;
+
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('categoryBadge').textContent = step.category;
+            document.getElementById('stepTitle').textContent = step.title;
+            document.getElementById('stepDescription').textContent = step.description;
+            document.getElementById('stepCounter').textContent = `Step ${currentStep + 1} of ${tutorialSteps.length}`;
+            document.getElementById('screenshotNumber').textContent = currentStep + 1;
+            document.getElementById('stepFileName').textContent = currentStep + 1;
+            document.getElementById('screenshotLabel').textContent = `Step ${currentStep + 1}`;
+
+            const instructionsList = document.getElementById('instructionsList');
+            instructionsList.innerHTML = '';
+            step.instructions.forEach((instruction, index) => {
+                const li = document.createElement('li');
+                li.className = 'instruction-item';
+                li.innerHTML = `
+                    <span class="instruction-number">${index + 1}</span>
+                    <span>${instruction}</span>
+                `;
+                instructionsList.appendChild(li);
+            });
+
+            document.getElementById('prevBtn').disabled = currentStep === 0;
+            document.getElementById('nextBtn').disabled = currentStep === tutorialSteps.length - 1;
+            
+            // Load screenshot for current step
+            loadScreenshot();
+        }
+
+        function nextStep() {
+            if (currentStep < tutorialSteps.length - 1) {
+                currentStep++;
+                renderStep();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                renderStep();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function goToStep(index) {
+            currentStep = index;
+            renderStep();
+            toggleOverlay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleOverlay() {
+            const overlay = document.getElementById('overlay');
+            overlay.classList.toggle('active');
+            if (overlay.classList.contains('active')) {
+                renderOverlay();
+            }
+        }
+
+        function closeOverlayOnBackdrop(event) {
+            if (event.target.id === 'overlay') {
+                toggleOverlay();
+            }
+        }
+
+        function renderOverlay() {
+            const categories = [...new Set(tutorialSteps.map(step => step.category))];
+            const overlayBody = document.getElementById('overlayBody');
+            overlayBody.innerHTML = '';
+
+            categories.forEach((category, catIndex) => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+
+                const title = document.createElement('h3');
+                title.className = 'category-title';
+                title.innerHTML = `
+                    <span class="category-number">${catIndex + 1}</span>
+                    ${category}
+                `;
+                section.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'steps-grid';
+
+                tutorialSteps.forEach((step, index) => {
+                    if (step.category === category) {
+                        const card = document.createElement('div');
+                        card.className = 'step-card';
+                        if (index === currentStep) card.classList.add('active');
+                        card.onclick = () => goToStep(index);
+
+                        card.innerHTML = `
+                            <div class="step-card-header">
+                                <span class="step-number">${index + 1}</span>
+                                <div>
+                                    <h4 class="step-card-title">${step.title}</h4>
+                                    <p class="step-card-description">${step.description}</p>
+                                </div>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    }
+                });
+
+                section.appendChild(grid);
+                overlayBody.appendChild(section);
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousStep();
+            if (e.key === 'ArrowRight') nextStep();
+            if (e.key === 'Escape' && document.getElementById('overlay').classList.contains('active')) {
+                toggleOverlay();
+            }
+        });
+
+        // Initialize
+        renderStep();
+    </script>
+</body>
+</html>
